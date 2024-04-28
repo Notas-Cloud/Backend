@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class NotaController {
-    private final NotaService notaService;
+    private final NotaService notaService; 
     private final UsuarioService usuarioService;
+    
 
     @GetMapping("/vernotas")
     public ResponseEntity<List<Nota>> getNotasDelUsuarioAutenticado() {
