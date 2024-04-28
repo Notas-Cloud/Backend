@@ -30,10 +30,9 @@ public class UsuarioService {
                 () -> new RuntimeException("Usuario no encontrado")
         );
         String token = jwtService.generateToken(new HashMap<>(), user.getUsername());
-        return TokenResponse.builder()
-                .token(token)
-                .build();
+        return new TokenResponse(token); // Reemplaza el uso de 'builder' por un constructor o método alternativo
     }
+
 
     public TokenResponse addUsuario(Usuario usuario) {
         Usuario user = Usuario.builder()
@@ -55,6 +54,9 @@ public class UsuarioService {
                 .build();
     }
 
+    public Optional<Usuario> findByUsername(String username) {
+        return usuarioRepository.findByUsername(username);
+    }
     public Optional<Usuario> getUsuarioById(Long id) {
         return usuarioRepository.findById(id);
     }
@@ -87,4 +89,8 @@ public class UsuarioService {
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
+    public String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
 }
